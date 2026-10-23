@@ -10,10 +10,14 @@ from collector.fetch_ladder import FetchLadder
 from collector.quality_guard import CaptureQualityGuard
 from collector.health_score import compute_and_update_source_health
 from core.db import DB_PATH
+from pipeline import run_pipeline
+
+MAX_CAPTURE_ATTEMPTS = 3
+RETRY_BASE_SECONDS = 5
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
-class RivalIQScheduler:
+class IntelTrackScheduler:
     """Manages multi-tiered background polling loops and adaptive cadence boosting[cite: 2]."""
 
     def __init__(self, demo_mode: bool = True):
@@ -27,8 +31,19 @@ class RivalIQScheduler:
 
         try:
             # 1. Execute 4-step Fetch Ladder[cite: 2]
-            ladder = FetchLadder(source_id=source_id, url=url)
-            snapshot_meta = await ladder.execute_ladder()
+            snapshot_meta = None
+            for attempt in range(1, MAX_CAPTURE_ATTEMPTS + 1):
+                try:
+                    ladder = FetchLadder(source_id=source_id, url=url)
+                    snapshot_meta = await ladder.execute_ladder()
+                    break
+                except PermissionError:
+                    raise  # robots.txt block: never retry
+                except Exception as e:
+                    logging.warning(f"CAPTURE_RETRY | Source: {source_id} | Attempt {attempt}/{MAX_CAPTURE_ATTEMPTS} | {e}")
+                    if attempt == MAX_CAPTURE_ATTEMPTS:
+                        raise
+                    await asyncio.sleep(RETRY_BASE_SECONDS * 2 ** (attempt - 1))
             
             raw_text = snapshot_meta.get("raw_text", "")
             
@@ -45,11 +60,28 @@ class RivalIQScheduler:
             current_health = compute_and_update_source_health(source_id)
             logging.info(f"CAPTURE_SUCCESS | Source: {source_id} | Snapshot: {snapshot_meta['snapshot_id']} | Health: {current_health}")
 
-            # Notify Person 2 event pipeline via DB or message queue (New Row in `snapshots`)[cite: 1]
+            # Hand the new snapshot to Person 2's pipeline (extract -> verify -> diff -> classify -> alert)
+            meta = self._load_source_meta(source_id)
+            if meta:
+                summary = await asyncio.to_thread(
+                    run_pipeline,
+                    snapshot_meta["snapshot_id"], source_id, meta["market"],
+                    meta["competitor"], raw_text, url, meta["region"],
+                )
+                logging.info(f"PIPELINE_DONE | Source: {source_id} | {summary}")
 
         except Exception as e:
             logging.error(f"SCHEDULER_WORKER_ERROR | Source: {source_id} | Exception: {e}")
             compute_and_update_source_health(source_id)
+
+    @staticmethod
+    def _load_source_meta(source_id: str) -> dict | None:
+        conn = sqlite3.connect(DB_PATH)
+        row = conn.execute(
+            "SELECT market, competitor, region FROM sources WHERE id = ?", (source_id,)
+        ).fetchone()
+        conn.close()
+        return {"market": row[0], "competitor": row[1], "region": row[2]} if row else None
 
     def load_and_schedule_sources(self):
         """Loads registered sources from SQLite DB and configures Fast/Slow lanes[cite: 2]."""
@@ -136,13 +168,13 @@ class RivalIQScheduler:
         """Starts the scheduler event loop."""
         self.load_and_schedule_sources()
         self.scheduler.start()
-        logging.info("RivalIQ Adaptive Scheduler started.")
+        logging.info("IntelTrack Adaptive Scheduler started.")
 
 
 # Entry point runner
 if __name__ == "__main__":
     async def main():
-        scheduler_engine = RivalIQScheduler(demo_mode=True)
+        scheduler_engine = IntelTrackScheduler(demo_mode=True)
         scheduler_engine.start()
 
         # Keep event loop active

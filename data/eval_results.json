@@ -1,0 +1,379 @@
+{
+  "generated_at": "2026-10-23T23:02:59.120357+00:00",
+  "summary": {
+    "total": 32,
+    "real": 20,
+    "noise": 12,
+    "naive": {
+      "precision": 0.625,
+      "recall": 1.0,
+      "tp": 20,
+      "fp": 12,
+      "fn": 0
+    },
+    "rivaliq": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "tp": 20,
+      "fp": 0,
+      "fn": 0
+    },
+    "stealth_recall": 1.0,
+    "extraction_verified_pct": 100.0,
+    "avg_ttd_ms": 5.6
+  },
+  "cases": [
+    {
+      "label": "isp_price_hike",
+      "market": "isp",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": false,
+      "ttd_ms": 10.5
+    },
+    {
+      "label": "isp_fup_cut_stealth",
+      "market": "isp",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": true,
+      "ttd_ms": 7.3
+    },
+    {
+      "label": "isp_speed_cut",
+      "market": "isp",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": true,
+      "ttd_ms": 7.0
+    },
+    {
+      "label": "isp_ott_removed",
+      "market": "isp",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": true,
+      "ttd_ms": 6.8
+    },
+    {
+      "label": "isp_new_ott_added",
+      "market": "isp",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": false,
+      "ttd_ms": 6.9
+    },
+    {
+      "label": "isp_post_fup_cut",
+      "market": "isp",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": true,
+      "ttd_ms": 6.3
+    },
+    {
+      "label": "isp_plan_renamed",
+      "market": "isp",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 12,
+      "changes_classified": 12,
+      "stealth_flagged": false,
+      "ttd_ms": 6.7
+    },
+    {
+      "label": "isp_footer_year",
+      "market": "isp",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 1.9
+    },
+    {
+      "label": "isp_cookie_banner",
+      "market": "isp",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 1.7
+    },
+    {
+      "label": "isp_testimonial",
+      "market": "isp",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 1.3
+    },
+    {
+      "label": "isp_whitespace",
+      "market": "isp",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 1.5
+    },
+    {
+      "label": "dairy_price_hike",
+      "market": "dairy",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": false,
+      "ttd_ms": 8.2
+    },
+    {
+      "label": "dairy_pack_shrink",
+      "market": "dairy",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": true,
+      "ttd_ms": 8.3
+    },
+    {
+      "label": "dairy_fat_cut",
+      "market": "dairy",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": false,
+      "ttd_ms": 8.6
+    },
+    {
+      "label": "dairy_name_change",
+      "market": "dairy",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 8,
+      "changes_classified": 8,
+      "stealth_flagged": false,
+      "ttd_ms": 11.4
+    },
+    {
+      "label": "dairy_price_and_pack",
+      "market": "dairy",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 2,
+      "changes_classified": 2,
+      "stealth_flagged": false,
+      "ttd_ms": 7.8
+    },
+    {
+      "label": "dairy_price_cut",
+      "market": "dairy",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": false,
+      "ttd_ms": 7.1
+    },
+    {
+      "label": "dairy_footer_year",
+      "market": "dairy",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 1.4
+    },
+    {
+      "label": "dairy_cookie_banner",
+      "market": "dairy",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 1.3
+    },
+    {
+      "label": "dairy_testimonial",
+      "market": "dairy",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 1.6
+    },
+    {
+      "label": "dairy_caps",
+      "market": "dairy",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 1.6
+    },
+    {
+      "label": "hp_price_hike",
+      "market": "headphones",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": false,
+      "ttd_ms": 8.5
+    },
+    {
+      "label": "hp_battery_cut_stealth",
+      "market": "headphones",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": true,
+      "ttd_ms": 8.6
+    },
+    {
+      "label": "hp_anc_removed",
+      "market": "headphones",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": true,
+      "ttd_ms": 8.2
+    },
+    {
+      "label": "hp_warranty_cut",
+      "market": "headphones",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": true,
+      "ttd_ms": 8.0
+    },
+    {
+      "label": "hp_model_renamed",
+      "market": "headphones",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 10,
+      "changes_classified": 10,
+      "stealth_flagged": false,
+      "ttd_ms": 8.3
+    },
+    {
+      "label": "hp_price_and_battery",
+      "market": "headphones",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 2,
+      "changes_classified": 2,
+      "stealth_flagged": false,
+      "ttd_ms": 8.3
+    },
+    {
+      "label": "hp_price_cut",
+      "market": "headphones",
+      "is_real_change": true,
+      "naive_alerted": true,
+      "rivaliq_alerted": true,
+      "diffs_found": 1,
+      "changes_classified": 1,
+      "stealth_flagged": false,
+      "ttd_ms": 8.0
+    },
+    {
+      "label": "hp_footer_year",
+      "market": "headphones",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 2.1
+    },
+    {
+      "label": "hp_cookie_banner",
+      "market": "headphones",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 1.4
+    },
+    {
+      "label": "hp_testimonial",
+      "market": "headphones",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 1.9
+    },
+    {
+      "label": "hp_whitespace",
+      "market": "headphones",
+      "is_real_change": false,
+      "naive_alerted": true,
+      "rivaliq_alerted": false,
+      "diffs_found": 0,
+      "changes_classified": 0,
+      "stealth_flagged": false,
+      "ttd_ms": 1.3
+    }
+  ]
+}

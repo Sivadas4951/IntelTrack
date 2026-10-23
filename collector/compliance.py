@@ -13,7 +13,7 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s"
 )
 
-USER_AGENT = "RivalIQ-Hackathon-Monitor/1.0 (Pune; compliance-checked)"
+USER_AGENT = "IntelTrack-Hackathon-Monitor/1.0 (Pune; compliance-checked)"
 
 class ComplianceGuard:
     def __init__(self, rate_limit_seconds: float = 10.0):

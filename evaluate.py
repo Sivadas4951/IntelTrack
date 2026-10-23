@@ -4,7 +4,7 @@ evaluate.py
 Benchmark harness for Person 2's deliverables.
 
 Generates ~40 mutated page variants (real changes + noise),
-runs both a naive text-diff baseline and RivalIQ, and reports:
+runs both a naive text-diff baseline and IntelTrack, and reports:
   - Alerts raised
   - Precision (of alerts raised, how many were real)
   - Recall    (of real changes, how many were caught)
@@ -176,7 +176,7 @@ def run_evaluation():
         # ── Naive baseline ────────────────────────────────────────────────
         naive_alerted = _naive_baseline_alerts(baseline_text, mutated_text) == 1
 
-        # ── RivalIQ pipeline ──────────────────────────────────────────────
+        # ── IntelTrack pipeline ──────────────────────────────────────────────
         t_start = time.monotonic()
 
         # Extract + verify baseline
@@ -247,11 +247,11 @@ def run_evaluation():
     extraction_pct    = safe_div(extraction_verified, extraction_total) * 100
 
     print("\n" + "="*60)
-    print("RivalIQ Evaluation Results")
+    print("IntelTrack Evaluation Results")
     print("="*60)
     print(f"Total test cases : {total}  (real={len(real_changes)}, noise={len(noise_cases)})")
     print()
-    print(f"{'Metric':<35} {'Naive':>10} {'RivalIQ':>10}")
+    print(f"{'Metric':<35} {'Naive':>10} {'IntelTrack':>10}")
     print("-"*55)
     print(f"{'Alerts raised':<35} {naive_tp+naive_fp:>10} {rivaliq_tp+rivaliq_fp:>10}")
     print(f"{'True positives':<35} {naive_tp:>10} {rivaliq_tp:>10}")

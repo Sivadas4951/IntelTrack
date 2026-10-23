@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse, JSONResponse
 import uvicorn
 
-app = FastAPI(title="RivalIQ Mock Competitor Sandbox")
+app = FastAPI(title="IntelTrack Mock Competitor Sandbox")
 
 STATE_FILE = "mock_sites/state.json"
 
@@ -162,7 +162,7 @@ async def admin_panel():
     <!DOCTYPE html>
     <html>
     <head>
-        <title>RivalIQ Admin Flip Panel</title>
+        <title>IntelTrack Admin Flip Panel</title>
         <style>
             body {{ font-family: Arial, sans-serif; margin: 30px; background: #1e1e2f; color: #fff; }}
             .grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }}
@@ -175,7 +175,7 @@ async def admin_panel():
         </style>
     </head>
     <body>
-        <h1>RivalIQ Demo Admin Flip Panel</h1>
+        <h1>IntelTrack Demo Admin Flip Panel</h1>
         <p>Trigger stealth market changes or cosmetic layout noise live during the demonstration[cite: 1, 2].</p>
 
         <div class="grid">

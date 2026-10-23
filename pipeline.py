@@ -17,6 +17,7 @@ from core.db import DB_PATH
 from extraction.extractor import extract_claims
 from verification.verifier import verify_claims
 from change_intel.differ import get_diffs_for_source
+from change_intel.debounce import filter_diffs
 from change_intel.classifier import classify_diffs
 from change_intel.alert_router import route_alerts
 
@@ -57,8 +58,10 @@ def run_pipeline(
     _write_claims(claims)
 
     # 4. Diff
-    diffs = get_diffs_for_source(source_id)
-    print(f"[PIPELINE] Found {len(diffs)} raw diffs")
+    raw_diffs = get_diffs_for_source(source_id)
+    # Debounce: a change must persist in 2 consecutive captures before it alerts
+    diffs = filter_diffs(source_id, snapshot_id, raw_diffs)
+    print(f"[PIPELINE] Raw diffs: {len(raw_diffs)} | confirmed after debounce: {len(diffs)}")
 
     # 5. Classify + detect stealth
     changes = classify_diffs(diffs, market=market, competitor=competitor)
