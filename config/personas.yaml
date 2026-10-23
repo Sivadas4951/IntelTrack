@@ -1,0 +1,58 @@
+version: "personas_v1"
+note: "All persona thresholds and usage figures are illustrative assumptions, not observed facts."
+
+# If these facts differ across ranked items, the ranking is not like-for-like
+# and a warning is shown (for example 3% toned milk vs 4.5% whole milk).
+comparability:
+  isp: []
+  dairy: [fat_percentage]
+  headphones: [anc_enabled]
+
+personas:
+  isp:
+    - id: heavy_streaming_household
+      label: "Heavy-streaming household (200 Mbps)"
+      assumption: "Several simultaneous 4K streams and large downloads: needs at least 200 Mbps and a 2000 GB FUP cap."
+      rank_by: effective_monthly_cost
+      requirements:
+        - {field: speed_mbps, op: ">=", value: 200}
+        - {field: fup_cap_gb, op: ">=", value: 2000}
+    - id: light_user
+      label: "Light user (browsing and video calls)"
+      assumption: "Needs at least 50 Mbps and a 300 GB FUP cap."
+      rank_by: effective_monthly_cost
+      requirements:
+        - {field: speed_mbps, op: ">=", value: 50}
+        - {field: fup_cap_gb, op: ">=", value: 300}
+
+  dairy:
+    - id: family_daily
+      label: "Family buying 1 L of whole milk per day"
+      assumption: "30 litres per month, whole milk (fat 4.0% or more)."
+      usage: {monthly_litres: 30}
+      rank_by: cost_per_litre
+      requirements:
+        - {field: fat_percentage, op: ">=", value: 4.0}
+    - id: tea_household
+      label: "Tea household (15 L per month)"
+      assumption: "15 litres per month, any milk with at least 3.0% fat."
+      usage: {monthly_litres: 15}
+      rank_by: cost_per_litre
+      requirements:
+        - {field: fat_percentage, op: ">=", value: 3.0}
+
+  headphones:
+    - id: commuter_anc
+      label: "Daily commuter who needs noise cancelling"
+      assumption: "At least 35 h battery, ANC, and 12+ months warranty."
+      rank_by: cost_per_battery_hour
+      requirements:
+        - {field: battery_hours, op: ">=", value: 35}
+        - {field: anc_enabled, op: "==", value: true}
+        - {field: warranty_months, op: ">=", value: 12}
+    - id: budget_listener
+      label: "Budget listener"
+      assumption: "At least 20 h battery. ANC and warranty not required."
+      rank_by: cost_per_battery_hour
+      requirements:
+        - {field: battery_hours, op: ">=", value: 20}

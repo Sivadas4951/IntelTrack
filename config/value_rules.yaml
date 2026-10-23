@@ -1,0 +1,103 @@
+# Person 3 rules: value functions, field aliases, thresholds, card defaults.
+# Separate from Person 1/2 market configs so nothing of theirs is touched.
+version: "value_rules_v1"
+region_default: Pune
+
+# Headline metrics only use claims that pass these checks (two-lane rule).
+# "range" is allowed for now because the mock headphone page says "Up to 40 Hours".
+# Add "range" to excluded_ambiguity later if you want the strict rule.
+headline:
+  min_confidence: 0.7
+  excluded_ambiguity: [conditional, promotional, regional]
+
+# A value-layer change smaller than this is not called a stealth change.
+stealth:
+  min_effective_change_pct: 1.0
+
+# Counter-Move card defaults
+cards:
+  default_expiry_days: 7
+  default_owner:
+    isp: "Pricing Lead"
+    dairy: "Category Manager"
+    headphones: "Product Manager"
+
+markets:
+  isp:
+    # canonical name: [raw field names the extractor may use]
+    field_map:
+      price: [price_inr_per_month, price_inr]
+      speed_mbps: [speed_mbps]
+      fup_cap_gb: [fup_cap_gb]
+      post_fup_speed_mbps: [post_fup_speed_mbps]
+      ott_bundle: [ott_bundle]
+      plan_name: [plan_name]
+    field_types:
+      price: number
+      speed_mbps: number
+      fup_cap_gb: number
+      post_fup_speed_mbps: number
+      ott_bundle: list
+      plan_name: text
+    # Which direction is better for the customer
+    field_direction:
+      price: lower_is_better
+      speed_mbps: higher_is_better
+      fup_cap_gb: higher_is_better
+      post_fup_speed_mbps: higher_is_better
+      ott_bundle: more_is_better
+    # Only apply GST if the page shows prices EXCLUDING GST. Off by default
+    # so that computed numbers match what the page shows.
+    gst_rate: 0.18
+    apply_gst: false
+    metrics: [effective_monthly_cost, cost_per_mbps, cost_per_gb_pre_fup]
+    primary_metric: cost_per_mbps
+    criteria_default: [price, speed_mbps, fup_cap_gb, ott_bundle]
+    weights: {price: 0.5, quantity: 0.3, bundle: 0.2}
+
+  dairy:
+    field_map:
+      price: [price_inr]
+      pack_size_ml: [pack_size_ml]
+      fat_percentage: [fat_percentage]
+      product_name: [product_name]
+    field_types:
+      price: number
+      pack_size_ml: number
+      fat_percentage: number
+      product_name: text
+    field_direction:
+      price: lower_is_better
+      pack_size_ml: higher_is_better
+      fat_percentage: higher_is_better
+    gst_rate: 0.0
+    apply_gst: false
+    metrics: [cost_per_litre]
+    primary_metric: cost_per_litre
+    criteria_default: [price, pack_size_ml, fat_percentage]
+    weights: {price: 0.6, quantity: 0.3, bundle: 0.1}
+
+  headphones:
+    field_map:
+      price: [price_inr]
+      battery_hours: [battery_hours]
+      anc_enabled: [anc_enabled]
+      warranty_months: [warranty_months]
+      model_name: [model_name]
+    field_types:
+      price: number
+      battery_hours: number
+      anc_enabled: bool
+      warranty_months: number
+      model_name: text
+    field_direction:
+      price: lower_is_better
+      battery_hours: higher_is_better
+      anc_enabled: true_is_better
+      warranty_months: higher_is_better
+    gst_rate: 0.0
+    apply_gst: false
+    metrics: [cost_per_battery_hour, warranty_adjusted_cost]
+    primary_metric: cost_per_battery_hour
+    criteria_default: [price, battery_hours, anc_enabled, warranty_months]
+    weights: {price: 0.4, quantity: 0.3, bundle: 0.3}
