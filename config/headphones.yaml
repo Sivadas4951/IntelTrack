@@ -1,0 +1,16 @@
+market: headphones
+region_default: Pune
+competitors:
+  - name: SoundMax
+    pages:
+      - url: http://localhost:8001/audio/earbuds
+        type: pricing
+        cadence_minutes: 15
+schema:
+  model_name: string
+  price_inr: number
+  battery_hours: number
+  anc_enabled: boolean
+  warranty_months: number
+normalizers:
+  cost_per_battery_hour: "price_inr / battery_hours"

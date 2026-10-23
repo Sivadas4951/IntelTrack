@@ -1,0 +1,30 @@
+{
+  "isp": {
+    "plan_name": "Fiber Ultra",
+    "price_inr": 799,
+    "speed_mbps": 200,
+    "fup_cap_gb": 3300,
+    "post_fup_speed_mbps": 10,
+    "ott_bundle": ["Disney+ Hotstar", "SonyLIV"],
+    "testimonial": "Fastest internet in Pune! - Rahul S."
+  },
+  "dairy": {
+    "product_name": "Fresh Whole Milk",
+    "price_inr": 30,
+    "pack_size_ml": 500,
+    "fat_percentage": 4.5,
+    "testimonial": "Pure and fresh daily milk."
+  },
+  "headphones": {
+    "model_name": "SoundMax Pro TWS",
+    "price_inr": 1999,
+    "battery_hours": 40,
+    "anc_enabled": true,
+    "warranty_months": 12,
+    "testimonial": "Amazing noise cancellation!"
+  },
+  "cosmetic": {
+    "cookie_banner": "We use cookies to enhance your browsing experience.",
+    "footer_year": "2026"
+  }
+}

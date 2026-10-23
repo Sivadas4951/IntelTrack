@@ -1,0 +1,15 @@
+market: dairy
+region_default: Pune
+competitors:
+  - name: FreshDairy
+    pages:
+      - url: http://localhost:8001/dairy/products
+        type: pricing
+        cadence_minutes: 15
+schema:
+  product_name: string
+  price_inr: number
+  pack_size_ml: number
+  fat_percentage: number
+normalizers:
+  cost_per_litre: "(price_inr / pack_size_ml) * 1000"

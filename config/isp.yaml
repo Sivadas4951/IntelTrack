@@ -1,0 +1,18 @@
+market: isp
+region_default: Pune
+competitors:
+  - name: SpeedFiber
+    pages:
+      - url: http://localhost:8001/isp/plans
+        type: pricing
+        cadence_minutes: 15
+schema:
+  plan_name: string
+  price_inr_per_month: number
+  speed_mbps: number
+  fup_cap_gb: number
+  post_fup_speed_mbps: number
+  ott_bundle: list
+normalizers:
+  effective_monthly_cost: "price_inr_per_month"
+  cost_per_mbps: "price_inr_per_month / speed_mbps"
